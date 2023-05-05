@@ -152,7 +152,7 @@ class APIs{
         createdAt: time,
         isOnline: false,
         lastActive: time,
-        pushToken: '', told: ''
+        pushToken: '',
         );
         
         return(await firestore
@@ -273,8 +273,7 @@ class APIs{
       read: '',
       type: type,
       fromId: user.uid,
-      sent: time,
-      told: '', id: ''
+      sent: time, id: '', told: '',
 );
 
       final ref = firestore
@@ -325,7 +324,7 @@ class APIs{
  //delete message
   static Future<void> deleteMessage(Message message) async {
     await firestore
-        .collection('chats/${getConversationID(message.told)}/messages/')
+        .collection('chats/${getConversationID(message.fromId)}/messages/')
         .doc(message.sent)
         .delete();
 
@@ -336,7 +335,7 @@ class APIs{
   //update message
   static Future<void> updateMessage(Message message, String updatedMsg) async {
     await firestore
-        .collection('chats/${getConversationID(message.told)}/messages/')
+        .collection('chats/${getConversationID(message.fromId)}/messages/')
         .doc(message.sent)
         .update({'msg': updatedMsg});
   }
